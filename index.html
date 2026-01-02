@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Cinematic Wedding Package</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Cormorant+Garamond:wght@300;400;600&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: #0a0a0a;
+            color: #fff;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+            background: linear-gradient(180deg, #1a1a1a 0%, #0d0d0d 100%);
+            position: relative;
+        }
+        
+        .grain-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            opacity: 0.03;
+            pointer-events: none;
+            z-index: 1000;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, rgba(20,20,20,0.95) 0%, rgba(10,10,10,0.98) 100%);
+            padding: 80px 40px;
+            text-align: center;
+            position: relative;
+            border-bottom: 1px solid rgba(197, 157, 95, 0.3);
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 50% 50%, rgba(197, 157, 95, 0.1) 0%, transparent 70%);
+            animation: pulse 4s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.6; }
+        }
+        
+        .ornament {
+            position: absolute;
+            color: #c59d5f;
+            opacity: 0.2;
+            font-size: 80px;
+        }
+        
+        .ornament.left {
+            left: 40px;
+            top: 50%;
+            transform: translateY(-50%) rotate(-15deg);
+        }
+        
+        .ornament.right {
+            right: 40px;
+            top: 50%;
+            transform: translateY(-50%) rotate(15deg);
+        }
+        
+        .header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4.5em;
+            margin-bottom: 20px;
+            font-weight: 400;
+            letter-spacing: 8px;
+            text-transform: uppercase;
+            background: linear-gradient(135deg, #fff 0%, #c59d5f 50%, #fff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+            z-index: 1;
+            animation: shimmer 3s ease-in-out infinite;
+        }
+        
+        @keyframes shimmer {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        
+        .header .subtitle {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5em;
+            font-style: italic;
+            color: #c59d5f;
+            font-weight: 300;
+            letter-spacing: 4px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .photo-gallery {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0;
+            position: relative;
+        }
+        
+        .photo-box {
+            aspect-ratio: 3/4;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        
+        .photo-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(20%) contrast(1.1);
+            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), filter 0.8s;
+        }
+        
+        .photo-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(197, 157, 95, 0.3) 0%, transparent 50%, rgba(0,0,0,0.4) 100%);
+            z-index: 1;
+            transition: opacity 0.6s;
+        }
+        
+        .photo-box::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            z-index: 2;
+            transition: left 0.8s;
+        }
+        
+        .photo-box:hover img {
+            transform: scale(1.1);
+            filter: grayscale(0%) contrast(1.2);
+        }
+        
+        .photo-box:hover::before {
+            opacity: 0.5;
+        }
+        
+        .photo-box:hover::after {
+            left: 100%;
+        }
+        
+        .banner {
+            background: linear-gradient(135deg, #c59d5f 0%, #a07843 100%);
+            color: #fff;
+            padding: 25px 40px;
+            text-align: center;
+            font-size: 1.4em;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            box-shadow: 0 4px 20px rgba(197, 157, 95, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .banner::before {
+            content: '✦';
+            position: absolute;
+            left: 40px;
+            font-size: 1.5em;
+            animation: twinkle 2s ease-in-out infinite;
+        }
+        
+        .banner::after {
+            content: '✦';
+            position: absolute;
+            right: 40px;
+            font-size: 1.5em;
+            animation: twinkle 2s ease-in-out infinite 1s;
+        }
+        
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.4; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+        
+        .packages {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0;
+            padding: 80px 40px;
+            background: #0d0d0d;
+            position: relative;
+        }
+        
+        .packages::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 1px;
+            height: 100%;
+            background: linear-gradient(180deg, transparent, rgba(197, 157, 95, 0.3), transparent);
+        }
+        
+        .package {
+            padding: 60px 40px;
+            text-align: center;
+            position: relative;
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .package::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 20%;
+            height: 60%;
+            width: 1px;
+            background: linear-gradient(180deg, transparent, rgba(197, 157, 95, 0.2), transparent);
+        }
+        
+        .package:last-child::after {
+            display: none;
+        }
+        
+        .package:hover {
+            transform: translateY(-15px);
+        }
+        
+        .package:hover .package-badge {
+            transform: scale(1.1) rotate(360deg);
+            box-shadow: 0 10px 40px rgba(197, 157, 95, 0.6);
+        }
+        
+        .package-badge {
+            display: inline-block;
+            width: 100px;
+            height: 100px;
+            margin-bottom: 30px;
+            background: linear-gradient(135deg, #c59d5f 0%, #8b6f47 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5em;
+            box-shadow: 0 8px 30px rgba(197, 157, 95, 0.3);
+            border: 3px solid rgba(197, 157, 95, 0.3);
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+        
+        .package-badge::before {
+            content: '';
+            position: absolute;
+            inset: -5px;
+            border-radius: 50%;
+            padding: 2px;
+            background: linear-gradient(45deg, transparent, rgba(197, 157, 95, 0.5), transparent);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            animation: rotate 3s linear infinite;
+        }
+        
+        @keyframes rotate {
+            to { transform: rotate(360deg); }
+        }
+        
+        .package-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2em;
+            font-weight: 600;
+            margin-bottom: 30px;
+            color: #c59d5f;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+        
+        .package-features {
+            list-style: none;
+            text-align: left;
+            display: inline-block;
+            max-width: 300px;
+        }
+        
+        .package-features li {
+            padding: 12px 0;
+            color: #ccc;
+            font-size: 1em;
+            font-weight: 300;
+            letter-spacing: 1px;
+            border-bottom: 1px solid rgba(197, 157, 95, 0.1);
+            transition: all 0.3s;
+        }
+        
+        .package-features li:hover {
+            color: #c59d5f;
+            padding-left: 10px;
+        }
+        
+        .package-features li::before {
+            content: '◆';
+            color: #c59d5f;
+            font-weight: bold;
+            margin-right: 15px;
+            font-size: 0.8em;
+        }
+        
+        .pricing-section {
+            background: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 100%);
+            padding: 80px 40px;
+            text-align: center;
+            border-top: 1px solid rgba(197, 157, 95, 0.3);
+            border-bottom: 1px solid rgba(197, 157, 95, 0.3);
+            position: relative;
+        }
+        
+        .pricing-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            height: 1px;
+            background: radial-gradient(circle, rgba(197, 157, 95, 0.6) 0%, transparent 70%);
+        }
+        
+        .total-cost {
+            display: inline-block;
+            background: linear-gradient(135deg, rgba(197, 157, 95, 0.1) 0%, rgba(197, 157, 95, 0.05) 100%);
+            padding: 50px 80px;
+            border-radius: 20px;
+            border: 2px solid rgba(197, 157, 95, 0.3);
+            box-shadow: 0 15px 50px rgba(0,0,0,0.5), inset 0 1px 1px rgba(197, 157, 95, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .total-cost::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(197, 157, 95, 0.1) 0%, transparent 70%);
+            animation: glow 3s ease-in-out infinite;
+        }
+        
+        @keyframes glow {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.2); opacity: 1; }
+        }
+        
+        .cost-label {
+            font-family: 'Playfair Display', serif;
+            font-size: 2em;
+            color: #c59d5f;
+            margin-right: 30px;
+            font-weight: 400;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .cost-amount {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5em;
+            background: linear-gradient(135deg, #fff 0%, #c59d5f 50%, #fff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+            position: relative;
+            z-index: 1;
+            letter-spacing: 2px;
+        }
+        
+        .footer {
+            background: linear-gradient(135deg, #0a0a0a 0%, #000 100%);
+            padding: 50px 40px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .terms-section {
+            background: linear-gradient(135deg, #141414 0%, #0a0a0a 100%);
+            padding: 60px 40px;
+            border-top: 1px solid rgba(197, 157, 95, 0.3);
+        }
+        
+        .terms-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+        }
+        
+        .terms-column h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5em;
+            color: #c59d5f;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+            border-bottom: 2px solid rgba(197, 157, 95, 0.3);
+            padding-bottom: 10px;
+        }
+        
+        .terms-column ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .terms-column ul li {
+            color: #ccc;
+            font-size: 0.95em;
+            line-height: 1.8;
+            padding: 8px 0;
+            padding-left: 20px;
+            position: relative;
+            font-weight: 300;
+        }
+        
+        .terms-column ul li::before {
+            content: '•';
+            color: #c59d5f;
+            position: absolute;
+            left: 0;
+            font-size: 1.2em;
+        }
+        
+        .issued-by .name {
+            color: #fff;
+            font-size: 1.2em;
+            font-weight: 600;
+            margin: 15px 0 5px 0;
+        }
+        
+        .issued-by .role {
+            color: #c59d5f;
+            font-style: italic;
+            margin-bottom: 15px;
+        }
+        
+        .issued-by .contact {
+            color: #ccc;
+            font-size: 0.9em;
+            line-height: 1.8;
+            margin-top: 10px;
+        }
+        
+        @media (max-width: 768px) {
+            .terms-container {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+        }
+        
+        .book-now {
+            font-size: 1.8em;
+            font-weight: 400;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            letter-spacing: 2px;
+        }
+        
+        .book-now-label {
+            font-family: 'Playfair Display', serif;
+            color: #c59d5f;
+            text-transform: uppercase;
+        }
+        
+        .phone-icon {
+            font-size: 1.2em;
+            color: #c59d5f;
+            animation: ring 2s ease-in-out infinite;
+        }
+        
+        @keyframes ring {
+            0%, 100% { transform: rotate(0deg); }
+            10%, 30% { transform: rotate(-10deg); }
+            20%, 40% { transform: rotate(10deg); }
+        }
+        
+        .phone-number {
+            color: #fff;
+            font-weight: 600;
+            letter-spacing: 3px;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.5em;
+                letter-spacing: 4px;
+            }
+            
+            .header .subtitle {
+                font-size: 1.5em;
+            }
+            
+            .photo-gallery {
+                grid-template-columns: 1fr;
+            }
+            
+            .packages {
+                grid-template-columns: 1fr;
+                padding: 40px 20px;
+            }
+            
+            .package::after {
+                display: none;
+            }
+            
+            .packages::before {
+                display: none;
+            }
+            
+            .ornament {
+                display: none;
+            }
+            
+            .total-cost {
+                padding: 30px 40px;
+            }
+            
+            .cost-label {
+                font-size: 1.5em;
+                margin-right: 15px;
+            }
+            
+            .cost-amount {
+                font-size: 2.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="grain-overlay"></div>
+    <div class="container">
+        <div class="header">
+            <div class="ornament left">❖</div>
+            <div class="ornament right">❖</div>
+            <h1>Wedding Package</h1>
+            <div class="subtitle">Mayur Patel</div>
+        </div>
+        
+        <div class="photo-gallery">
+            <div class="photo-box">
+                <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=600" alt="Wedding Couple 1">
+            </div>
+            <div class="photo-box">
+                <img src="https://images.unsplash.com/photo-1606800052052-a08af7148866?w=600" alt="Wedding Couple 2">
+            </div>
+            <div class="photo-box">
+                <img src="https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=600" alt="Wedding Couple 3">
+            </div>
+        </div>
+        
+        <div class="banner">
+            Free Fresh Bouquet & Corsage on Your Wedding Day!
+        </div>
+        
+        <div class="packages">
+            <div class="package">
+                <div class="package-badge">📷</div>
+                <div class="package-title">Day 1</div>
+                <ul class="package-features">
+                    <li>One Photographer</li>
+                    <li>One Traditional Videographer</li>
+                    <li>One Candid Photographer</li>
+                    <li>One Cinematic Photographer</li>
+                </ul>
+            </div>
+            
+            <div class="package">
+                <div class="package-badge">🎬</div>
+                <div class="package-title">Day 2</div>
+                <ul class="package-features">
+                    <li>One Photographer</li>
+                    <li>One Traditional Videographer</li>
+                    <li>One Candid Photographer</li>
+                    <li>One Cinematic Photographer</li>
+                    <li>Drone Shoot</li>
+                </ul>
+            </div>
+            
+            <div class="package">
+                <div class="package-badge">🎥</div>
+                <div class="package-title">Day 3</div>
+                <ul class="package-features">
+                    <li>One Photographer</li>
+                    <li>One Traditional Videographer</li>
+                    <li>One Candid Photographer</li>
+                    <li>One Cinematic Photographer</li>
+                    <li>Drone Shoot</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="pricing-section">
+            <div class="total-cost">
+                <span class="cost-label">Total Cost:</span>
+                <span class="cost-amount">₹1,90,000</span>
+            </div>
+        </div>
+        
+        <div class="terms-section">
+            <div class="terms-container">
+                <div class="terms-column">
+                    <h3>Payment Terms</h3>
+                    <ul>
+                        <li>50% advance before the event</li>
+                        <li>50% after project completion</li>
+                    </ul>
+                </div>
+                
+                <div class="terms-column">
+                    <h3>Terms & Notes</h3>
+                    <ul>
+                        <li>Quotation valid for 10 days from the date of issue.</li>
+                        <li>Drone, extra team, or extended hours will be charged separately.</li>
+                        <li>Travel and accommodation (if required) will be charged additionally.</li>
+                        <li>Raw data will not be shared unless agreed upon in advance.</li>
+                        <li>Final edited photos and videos will be delivered within 10 working days via drive link.</li>
+                    </ul>
+                </div>
+                
+                <div class="terms-column issued-by">
+                    <h3>Issued By:</h3>
+                    <p class="name">Mayur Patel</p>
+                    <p class="role">Founder – 4Clickmore Films and Moonmagic Films</p>
+                    <p class="contact">📱 +91 83208 37474 | ✉ mayurpatel837474@gmail.com</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <div class="book-now">
+                <span class="book-now-label">Book Now</span>
+                <span class="phone-icon">📞</span>
+                <span class="phone-number">+91 83208 37474</span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
